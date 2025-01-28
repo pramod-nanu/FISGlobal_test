@@ -1,0 +1,25 @@
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+public class Test_API {
+    // Complete respinse is stored in variable res
+    Response res = given()
+                        .contentType("application/json")
+
+                   .when()
+                        .get("api.coindesk.com/v1/bpi/currentprice.json");
+
+    // Verification of success code
+   Assert.assertEquals(res.getStatusCode(),200);
+
+    // Verification of expected output of British Pound Sterling
+    String result = res.jsonPath().get("@.bpi.GBP.description").toString();
+    Assert.assertEquals(result,"British Pound Sterling");
+
+    //Verification of Header  
+    String headerValue = res.getHeader("contentType");
+    System.out.println("The value of Content type header is: "+headerValue);
+    Assert.assertEquals(headerValue,"application/json; charset=utf-8");
+}
