@@ -1,0 +1,30 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Test_UI {
+    public static void main(String[] args) {  
+        //Setting up chrome driver
+        System.setProperty("webdriver.chrome.driver","/Users/pramod/Documents/chromedriver-mac-arm64/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        // Navigating to webpage
+        driver.get("https://www.ebay.com/");
+        driver.manage().window().maximize();
+        // Finding Webelements and performing operations
+        driver.findElement(By.xpath("//*[@id=\"gh-ac\"]")).sendKeys("book");
+        driver.findElement(By.xpath("//*[@id=\"gh-search-btn\"]/span")).click();
+        //Since expected element is first book which is dynamic in nature hence used xpath axes
+        driver.findElement(By.xpath("//*[@id=\"srp-river-results\"]/ul/child::li[1]/child::div[1]/child::div[1]\n")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'Add to cart')]")).click();
+        // Verification if 1 is displayed or not
+        Boolean isDisplayed = driver.findElement(By.xpath("//span[@role='img'][normalize-space()='1']")).isDisplayed();
+        if(isDisplayed == true)
+        {
+            System.out.println("Add to cart is successfully updated");
+        }
+        else
+        {
+            System.out.println("Add to cart is not successfully updated");
+        }
+    }
+}
