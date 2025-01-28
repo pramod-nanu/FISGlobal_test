@@ -10,7 +10,9 @@ public class Test_UI {
         // Navigating to webpage
         driver.get("https://www.ebay.com/");
         driver.manage().window().maximize();
-        // Finding Webelements and performing operations
+        //Inserting waits for smooth operation
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        // Finding WebElements and performing operations
         driver.findElement(By.xpath("//*[@id=\"gh-ac\"]")).sendKeys("book");
         driver.findElement(By.xpath("//*[@id=\"gh-search-btn\"]/span")).click();
         //Since expected element is first book which is dynamic in nature hence used xpath axes
@@ -26,5 +28,7 @@ public class Test_UI {
         {
             System.out.println("Add to cart is not successfully updated");
         }
+        // Closing the browser
+        driver.close();
     }
 }
