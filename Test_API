@@ -4,7 +4,7 @@ import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
 public class Test_API {
-    // Complete respinse is stored in variable res
+    // Complete response is stored in variable res
     Response res = given()
                         .contentType("application/json")
 
